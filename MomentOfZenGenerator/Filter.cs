@@ -8,7 +8,7 @@ namespace MomentOfZenGenerator
     {
         public IEnumerable<String> GetVideoUrlsLessThanOneMinuteLong()
         {
-            var requestor = new Requestor(new YouTubeRequestUriBuilder());
+            var requestor = new Requestor(new YouTubeRequestUriBuilder(), new ResponseProvider());
             var content = requestor.GetVideos(String.Empty);
 
             var videos = new List<String>();
