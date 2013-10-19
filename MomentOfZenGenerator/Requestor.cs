@@ -1,9 +1,9 @@
-﻿using System;
-using MomentOfZenGenerator.Interfaces;
+﻿using MomentOfZenGenerator.Interfaces;
+using System;
 
 namespace MomentOfZenGenerator
 {
-    public class Requestor
+    public class Requestor : IRequestor
     {
         private IYouTubeRequestUriBuilder requestUriBuilder;
         private IResponseProvider responseProvider;

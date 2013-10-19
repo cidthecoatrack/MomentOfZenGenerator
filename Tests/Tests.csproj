@@ -52,9 +52,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Integration\WordnikRequestUriTests.cs" />
     <Compile Include="Unit\RequestorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unit\ResponseProviderTests.cs" />
+    <Compile Include="Integration\ResponseProviderTests.cs" />
     <Compile Include="Unit\WordnikRequestUriBuilderTests.cs" />
     <Compile Include="Unit\YouTubeRequestUriBuilderTests.cs" />
   </ItemGroup>
@@ -67,9 +68,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Integration\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

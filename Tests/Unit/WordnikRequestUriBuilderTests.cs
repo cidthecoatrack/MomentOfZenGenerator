@@ -1,8 +1,8 @@
-﻿using System;
-using MomentOfZenGenerator;
+﻿using MomentOfZenGenerator;
 using MomentOfZenGenerator.Interfaces;
 using Moq;
 using NUnit.Framework;
+using System;
 
 namespace Tests.Unit
 {
@@ -25,10 +25,39 @@ namespace Tests.Unit
         }
 
         [Test]
-        public void PollsTheWordForFrequency()
+        public void PollsForFrequency()
         {
             builder.BuildRequestUri();
             mockResponseProvider.Verify(p => p.GetJsonResponseContent<WordnikFrequencyResponse>(It.IsAny<String>()), Times.Once);
+        }
+
+        [Test]
+        public void RequestUriHasFrequencyDividedByTwo()
+        {
+            response.TotalCount = 4;
+            var uri = builder.BuildRequestUri();
+            Assert.That(uri.Contains("minCorpusCount=2"), Is.True);
+        }
+
+        [Test]
+        public void RequestUriHasWordnikApiAsRoot()
+        {
+            var uri = builder.BuildRequestUri();
+            Assert.That(uri.StartsWith("http://api.wordnik.com/v4/words.json"), Is.True);
+        }
+
+        [Test]
+        public void RequestUriHasOtherParameters()
+        {
+            var uri = builder.BuildRequestUri();
+            Assert.That(uri.Contains("excludePartOfSpeech=proper-noun,proper-noun-plural,proper-noun-posessive,suffix,family-name,idiom,affix&hasDictionaryDef=true&includePartOfSpeech=noun,verb,adjective,definite-article,conjunction&limit=26&maxLength=7&api_key=774294bdb97d07a79400d06796f04c17b6ad2bb70a90c1127"), Is.True);
+        }
+
+        [Test]
+        public void RequestUriHasRandomWordsAction()
+        {
+            var uri = builder.BuildRequestUri();
+            Assert.That(uri.Contains("randomWords?"), Is.True);
         }
     }
 }

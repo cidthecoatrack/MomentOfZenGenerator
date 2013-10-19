@@ -1,8 +1,8 @@
-﻿using System;
+﻿using MomentOfZenGenerator.Interfaces;
+using System;
 using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
-using MomentOfZenGenerator.Interfaces;
 
 namespace MomentOfZenGenerator
 {
@@ -12,10 +12,6 @@ namespace MomentOfZenGenerator
         {
             var request = WebRequest.Create(uri);
             var response = request.GetResponse();
-
-            var httpResponse = response as HttpWebResponse;
-            if (httpResponse.StatusCode != HttpStatusCode.OK)
-                throw new WebException(httpResponse.StatusCode.ToString());
 
             var content = String.Empty;
 

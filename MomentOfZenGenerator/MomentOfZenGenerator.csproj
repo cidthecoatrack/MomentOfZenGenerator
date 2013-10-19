@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filter.cs" />
+    <Compile Include="Interfaces\IRequestor.cs" />
     <Compile Include="Interfaces\IWordnikRequestUriBuilder.cs" />
     <Compile Include="Interfaces\IYouTubeRequestUriBuilder.cs" />
     <Compile Include="Interfaces\IResponseProvider.cs" />
