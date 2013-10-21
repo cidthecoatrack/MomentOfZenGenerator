@@ -1,8 +1,8 @@
-﻿using MomentOfZenGenerator;
+﻿using System;
 using MomentOfZenGenerator.Interfaces;
+using MomentOfZenGenerator.Wordnik;
 using Moq;
 using NUnit.Framework;
-using System;
 
 namespace Tests.Unit
 {
@@ -57,7 +57,7 @@ namespace Tests.Unit
         public void RequestUriHasRandomWordsAction()
         {
             var uri = builder.BuildRequestUri();
-            Assert.That(uri.Contains("randomWords?"), Is.True);
+            Assert.That(uri.Contains("randomWord?"), Is.True);
         }
     }
 }

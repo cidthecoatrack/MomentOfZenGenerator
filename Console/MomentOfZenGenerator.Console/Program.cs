@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq;
+using MomentOfZenGenerator.Wordnik;
+using MomentOfZenGenerator.YouTube;
 
 namespace MomentOfZenGenerator.UI
 {
@@ -9,17 +10,26 @@ namespace MomentOfZenGenerator.UI
         {
             Console.WriteLine("Generating random Youtube video...");
 
-            var filter = new Filter();
-            var videos = Enumerable.Empty<String>();
+            var random = new Random();
+
+            var responseProvider = new ResponseProvider();
+            var wordnikUriBuilder = new WordnikRequestUriBuilder(responseProvider);
+            var wordnikResponseProvider = new WordnikResponseProvider(wordnikUriBuilder, responseProvider);
+
+            var youTubeResponseProvider = new YouTubeResponseProvider();
+            var filter = new Filter(youTubeResponseProvider);
+
+            var generator = new Generator(random, wordnikResponseProvider, filter);
             var attempts = 1;
+            var videoUrl = String.Empty;
 
             do
             {
-                Console.Write("\rAttempt {0}", attempts++);
-                videos = filter.GetVideoUrlsLessThanOneMinuteLong();
-            } while (!videos.Any());
+                Console.Write("\rAttempt {0} ({1})\t\t", attempts++);
+                videoUrl = generator.GetMomentOfZen();
+            } while (String.IsNullOrEmpty(videoUrl));
 
-            Console.WriteLine(videos.First());
+            Console.WriteLine(videoUrl);
             Console.Read();
         }
     }

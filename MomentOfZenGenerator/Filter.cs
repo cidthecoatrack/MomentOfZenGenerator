@@ -1,35 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml;
+using MomentOfZenGenerator.Interfaces;
 
 namespace MomentOfZenGenerator
 {
-    public class Filter
+    public class Filter : IFilter
     {
-        public IEnumerable<String> GetVideoUrlsLessThanOneMinuteLong()
+        private IYouTubeResponseProvider youTubeResponseProvider;
+
+        public Filter(IYouTubeResponseProvider youTubeResponseProvider)
         {
-            var requestor = new Requestor(new YouTubeRequestUriBuilder(), new ResponseProvider());
-            var content = requestor.GetVideos(String.Empty);
+            this.youTubeResponseProvider = youTubeResponseProvider;
+        }
 
-            var videos = new List<String>();
+        public IEnumerable<String> GetVideoUrlsLessThanOneMinuteLong(String searchWord)
+        {
+            var searchResults = youTubeResponseProvider.GetVideos(searchWord);
+            var videoUrls = new List<String>();
 
-            var videosXml = new XmlDocument();
-            videosXml.LoadXml(content);
-
-            var entries = videosXml.SelectNodes("feed/entry");
-
-            foreach (XmlNode entry in entries)
+            foreach (var video in searchResults.Entries)
             {
-                var duration = Convert.ToInt32(entry.SelectSingleNode("media:group/yt:duration").InnerText);
+                var mediaContent = video.Contents[0];
+                var duration = Convert.ToInt32(mediaContent.Duration);
 
                 if (duration <= 60)
-                {
-                    var url = entry.SelectSingleNode("media:group/media:player").InnerText;
-                    videos.Add(url);
-                }
+                    videoUrls.Add(mediaContent.Url);
             }
 
-            return videos;
+            return videoUrls;
         }
     }
 }

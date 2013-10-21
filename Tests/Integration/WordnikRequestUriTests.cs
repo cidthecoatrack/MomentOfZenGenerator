@@ -1,7 +1,8 @@
-﻿using MomentOfZenGenerator;
+﻿using System;
+using MomentOfZenGenerator;
 using MomentOfZenGenerator.Interfaces;
+using MomentOfZenGenerator.Wordnik;
 using NUnit.Framework;
-using System;
 
 namespace Tests.Integration
 {
@@ -22,8 +23,8 @@ namespace Tests.Integration
         [Test]
         public void GetARandomWordBack()
         {
-            var word = responseProvider.GetResponseContent(uri);
-            Assert.That(word, Is.Not.EqualTo(String.Empty));
+            var randomWordResponse = responseProvider.GetJsonResponseContent<WordnikRandomWordResponse>(uri);
+            Assert.That(randomWordResponse.Word, Is.Not.EqualTo(String.Empty));
         }
     }
 }

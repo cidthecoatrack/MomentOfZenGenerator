@@ -1,13 +1,13 @@
-﻿using MomentOfZenGenerator.Interfaces;
-using System;
+﻿using System;
+using MomentOfZenGenerator.Interfaces;
 
-namespace MomentOfZenGenerator
+namespace MomentOfZenGenerator.Wordnik
 {
     public class WordnikRequestUriBuilder : IWordnikRequestUriBuilder
     {
         private IResponseProvider responseProvider;
 
-        private const String root = "http://api.wordnik.com/v4/words.json";
+        private const String root = "http://api.wordnik.com/v4";
         private const Int32 frequencyDivisor = 2;
         private const String apiKey = "774294bdb97d07a79400d06796f04c17b6ad2bb70a90c1127";
 
@@ -20,7 +20,7 @@ namespace MomentOfZenGenerator
         {
             var frequency = GetFrequency();
 
-            return String.Format("{0}/randomWords?minCorpusCount={1}&excludePartOfSpeech=proper-noun,proper-noun-plural,proper-noun-posessive,suffix,family-name,idiom,affix&hasDictionaryDef=true&includePartOfSpeech=noun,verb,adjective,definite-article,conjunction&limit=26&maxLength=7&api_key={2}",
+            return String.Format("{0}/words.json/randomWord?minCorpusCount={1}&excludePartOfSpeech=proper-noun,proper-noun-plural,proper-noun-posessive,suffix,family-name,idiom,affix&hasDictionaryDef=true&includePartOfSpeech=noun,verb,adjective,definite-article,conjunction&limit=26&maxLength=7&api_key={2}",
                 root, frequency, apiKey);
         }
 
@@ -37,7 +37,7 @@ namespace MomentOfZenGenerator
             var word = "the";
             var year = 2012;
 
-            return String.Format("{0}/{1}/frequency?useCanonical=false&startYear={2}&endYear={2}&api_key={3}",
+            return String.Format("{0}/word.json/{1}/frequency?useCanonical=false&startYear={2}&endYear={2}&api_key={3}",
                 root, word, year, apiKey);
         }
     }
