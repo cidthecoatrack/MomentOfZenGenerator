@@ -1,8 +1,8 @@
-﻿using System;
-using Google.GData.Client;
-using Google.GData.YouTube;
+﻿using Google.GData.YouTube;
 using Google.YouTube;
 using MomentOfZenGenerator.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace MomentOfZenGenerator.YouTube
 {
@@ -21,10 +21,24 @@ namespace MomentOfZenGenerator.YouTube
             query.SafeSearch = YouTubeQuery.SafeSearchValues.Moderate;
         }
 
-        public Feed<Video> GetVideos(String searchWord)
+        public IEnumerable<YouTubeVideoProjection> GetVideos(String searchWord)
         {
             query.Query = searchWord;
-            return request.Get<Video>(query);
+            var response = request.Get<Video>(query);
+
+            var videos = new List<YouTubeVideoProjection>();
+
+            foreach (var video in response.Entries)
+            {
+                var projection = new YouTubeVideoProjection();
+
+                projection.Duration = Convert.ToInt32(video.Contents[0].Duration);
+                projection.Url = video.Contents[0].Url;
+
+                videos.Add(projection);
+            }
+
+            return videos;
         }
     }
 }

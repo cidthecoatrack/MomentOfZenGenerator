@@ -1,6 +1,6 @@
-﻿using System;
-using MomentOfZenGenerator.Wordnik;
+﻿using MomentOfZenGenerator.Wordnik;
 using MomentOfZenGenerator.YouTube;
+using System;
 
 namespace MomentOfZenGenerator.UI
 {
@@ -25,9 +25,10 @@ namespace MomentOfZenGenerator.UI
 
             do
             {
-                Console.Write("\rAttempt {0} ({1})\t\t", attempts++);
+                Console.Write("\rAttempt {0}", attempts++);
                 videoUrl = generator.GetMomentOfZen();
             } while (String.IsNullOrEmpty(videoUrl));
+            Console.WriteLine();
 
             Console.WriteLine(videoUrl);
             Console.Read();

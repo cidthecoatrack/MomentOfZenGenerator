@@ -1,11 +1,11 @@
-﻿using System;
-using Google.GData.Client;
-using Google.YouTube;
+﻿using MomentOfZenGenerator.YouTube;
+using System;
+using System.Collections.Generic;
 
 namespace MomentOfZenGenerator.Interfaces
 {
     public interface IYouTubeResponseProvider
     {
-        Feed<Video> GetVideos(String searchWord);
+        IEnumerable<YouTubeVideoProjection> GetVideos(String searchWord);
     }
 }

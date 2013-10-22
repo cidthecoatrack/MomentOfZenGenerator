@@ -1,6 +1,6 @@
-﻿using System;
+﻿using MomentOfZenGenerator.Interfaces;
+using System;
 using System.Collections.Generic;
-using MomentOfZenGenerator.Interfaces;
 
 namespace MomentOfZenGenerator
 {
@@ -15,17 +15,12 @@ namespace MomentOfZenGenerator
 
         public IEnumerable<String> GetVideoUrlsLessThanOneMinuteLong(String searchWord)
         {
-            var searchResults = youTubeResponseProvider.GetVideos(searchWord);
+            var videoProjections = youTubeResponseProvider.GetVideos(searchWord);
             var videoUrls = new List<String>();
 
-            foreach (var video in searchResults.Entries)
-            {
-                var mediaContent = video.Contents[0];
-                var duration = Convert.ToInt32(mediaContent.Duration);
-
-                if (duration <= 60)
-                    videoUrls.Add(mediaContent.Url);
-            }
+            foreach (var videoProjection in videoProjections)
+                if (videoProjection.Duration <= 60)
+                    videoUrls.Add(videoProjection.Url);
 
             return videoUrls;
         }
