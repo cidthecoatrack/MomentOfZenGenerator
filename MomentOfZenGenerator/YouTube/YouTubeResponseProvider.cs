@@ -32,10 +32,13 @@ namespace MomentOfZenGenerator.YouTube
             {
                 var projection = new YouTubeVideoProjection();
 
-                projection.Duration = Convert.ToInt32(video.Contents[0].Duration);
-                projection.Url = video.Contents[0].Url;
+                if (video.Contents.Count > 0)
+                {
+                    projection.Duration = Convert.ToInt32(video.Contents[0].Duration);
+                    projection.Url = video.Contents[0].Url;
 
-                videos.Add(projection);
+                    videos.Add(projection);
+                }
             }
 
             return videos;
