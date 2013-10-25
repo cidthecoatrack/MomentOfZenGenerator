@@ -1,8 +1,9 @@
-﻿using Google.GData.YouTube;
+﻿using System;
+using System.Collections.Generic;
+using Google.GData.Client;
+using Google.GData.YouTube;
 using Google.YouTube;
 using MomentOfZenGenerator.Interfaces;
-using System;
-using System.Collections.Generic;
 
 namespace MomentOfZenGenerator.YouTube
 {
@@ -17,8 +18,16 @@ namespace MomentOfZenGenerator.YouTube
             var settings = new YouTubeRequestSettings("Moment of Zen Generator", apiKey);
             request = new YouTubeRequest(settings);
 
+            InitializeQuery();
+        }
+
+        private void InitializeQuery()
+        {
             query = new YouTubeQuery(YouTubeQuery.DefaultVideoUri);
             query.SafeSearch = YouTubeQuery.SafeSearchValues.Moderate;
+
+            var atomCategory = new AtomCategory("Comedy", YouTubeNameTable.CategorySchema);
+            query.Categories.Add(new QueryCategory(atomCategory));
         }
 
         public IEnumerable<YouTubeVideoProjection> GetVideos(String searchWord)

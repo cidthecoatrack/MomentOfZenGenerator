@@ -3,7 +3,9 @@
 </head>
 
 <body>
-    <h1>@Html.ActionLink("Generate a new Moment of Zen", "Generate")</h1>
+    <h1 id="Generate">@Html.ActionLink("Generate a new Moment of Zen", "Generate")</h1>
 
-    <iframe title="MomentOfZen" src="@ViewBag.VideoUrl"></iframe>
+    <iframe id="MomentOfZen" title="MomentOfZen" src="@ViewBag.VideoUrl"></iframe>
+
+    <h3 id="Link"><a href="@ViewBag.VideoUrl" target="_blank">Here's the video</a></h3>
 </body>

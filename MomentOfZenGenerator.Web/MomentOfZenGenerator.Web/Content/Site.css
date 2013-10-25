@@ -60,12 +60,12 @@ textarea {
 	display: none;
 }
 
-h1
+#Generate, #Link
 {
     text-align: center;
 }
 
-iframe
+#MomentOfZen
 {
     display: block;
     margin: 0 auto;

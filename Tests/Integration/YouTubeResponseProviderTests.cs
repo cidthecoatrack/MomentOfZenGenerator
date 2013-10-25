@@ -1,7 +1,7 @@
-﻿using MomentOfZenGenerator.Interfaces;
+﻿using System.Linq;
+using MomentOfZenGenerator.Interfaces;
 using MomentOfZenGenerator.YouTube;
 using NUnit.Framework;
-using System.Linq;
 
 namespace Tests.Integration
 {
@@ -18,7 +18,7 @@ namespace Tests.Integration
         [Test]
         public void ResponseContainsEntries()
         {
-            var videos = provider.GetVideos("pentatonix");
+            var videos = provider.GetVideos("video");
             Assert.That(videos.Any(), Is.True);
         }
     }
