@@ -1,6 +1,8 @@
-﻿using MomentOfZenGenerator.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using MomentOfZenGenerator.Interfaces;
+using MomentOfZenGenerator.YouTube;
 
 namespace MomentOfZenGenerator
 {
@@ -16,13 +18,8 @@ namespace MomentOfZenGenerator
         public IEnumerable<String> GetVideoUrlsLessThanOneMinuteLong(String searchWord)
         {
             var videoProjections = youTubeResponseProvider.GetVideos(searchWord);
-            var videoUrls = new List<String>();
-
-            foreach (var videoProjection in videoProjections)
-                if (videoProjection.Duration <= 60)
-                    videoUrls.Add(videoProjection.Url);
-
-            return videoUrls;
+            var filteredVideos = videoProjections.Where(v => v.Duration <= 60);
+            return filteredVideos.Select<YouTubeVideoProjection, String>(v => v.Url);
         }
     }
 }
