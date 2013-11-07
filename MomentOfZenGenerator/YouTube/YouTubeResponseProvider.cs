@@ -24,7 +24,7 @@ namespace MomentOfZenGenerator.YouTube
         private void InitializeQuery()
         {
             query = new YouTubeQuery(YouTubeQuery.DefaultVideoUri);
-            query.SafeSearch = YouTubeQuery.SafeSearchValues.Moderate;
+            query.SafeSearch = YouTubeQuery.SafeSearchValues.Strict;
 
             var atomCategory = new AtomCategory("Comedy", YouTubeNameTable.CategorySchema);
             query.Categories.Add(new QueryCategory(atomCategory));
