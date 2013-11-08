@@ -1,9 +1,9 @@
-﻿using MomentOfZenGenerator;
+﻿using System;
+using System.Linq;
+using MomentOfZenGenerator;
 using MomentOfZenGenerator.Interfaces;
 using Moq;
 using NUnit.Framework;
-using System;
-using System.Linq;
 
 namespace Tests.Unit
 {
@@ -74,7 +74,7 @@ namespace Tests.Unit
         }
 
         [Test]
-        public void ReturnsOneVideo()
+        public void ReturnsVideoFromIndexDeterminedAtRandom()
         {
             var videoUrls = new[] { "first url", "second url", "third url", "fourth url", "url 5" };
             mockFilter.Setup(f => f.GetVideoUrlsLessThanOneMinuteLong(It.IsAny<String>())).Returns(videoUrls);
