@@ -5,7 +5,5 @@
 <body>
     <h1 id="Generate">@Html.ActionLink("Generate a new Moment of Zen", "Generate")</h1>
 
-    <iframe id="MomentOfZen" title="MomentOfZen" src="@ViewBag.VideoUrl"></iframe>
-
-    <h3 id="Link"><a href="@ViewBag.VideoUrl" target="_blank">Here's the video</a></h3>
+    <iframe id="MomentOfZen" type="text/html" src="@ViewBag.VideoUrl" frameborder="0" allowfullscreen></iframe>
 </body>

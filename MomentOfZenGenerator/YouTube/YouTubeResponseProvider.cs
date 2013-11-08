@@ -10,6 +10,7 @@ namespace MomentOfZenGenerator.YouTube
     public class YouTubeResponseProvider : IYouTubeResponseProvider
     {
         private const String apiKey = "AI39si59imK5hP68xR-C4IbraWEIQltv9pSfXouSpTlNESEFzbyhMurwKQV4jWVreZMfjF7zabOBZyDDxKTOEyIuJGh-ChX3og";
+        private const String baseYoutubeEmbedUrl = "https://www.youtube.com/embed/";
         private YouTubeRequest request;
         private YouTubeQuery query;
 
@@ -39,12 +40,12 @@ namespace MomentOfZenGenerator.YouTube
 
             foreach (var video in response.Entries)
             {
-                var projection = new YouTubeVideoProjection();
-
                 if (video.Contents.Count > 0)
                 {
+                    var projection = new YouTubeVideoProjection();
+
                     projection.Duration = Convert.ToInt32(video.Contents[0].Duration);
-                    projection.Url = video.Contents[0].Url;
+                    projection.Url = baseYoutubeEmbedUrl + video.VideoId;
 
                     videos.Add(projection);
                 }
