@@ -15,6 +15,7 @@ namespace MomentOfZenGenerator.Web.Controllers
 
         public GeneratorController()
         {
+            statsdClient = StatsdClient.Create("191.238.44.201", 8125, "moment-of-zen-generator");
             var random = new Random();
 
             var responseProvider = new ResponseProvider();
@@ -22,11 +23,10 @@ namespace MomentOfZenGenerator.Web.Controllers
             var wordnikResponseProvider = new WordnikResponseProvider(wordnikRequestUriBuilder, responseProvider);
 
             var youTubeResponseProvider = new YouTubeResponseProvider();
-            var filter = new Filter(youTubeResponseProvider);
+            var filter = new Filter(youTubeResponseProvider, statsdClient);
 
             generator = new Generator(random, wordnikResponseProvider, filter);
 
-            statsdClient = StatsdClient.Create("191.238.44.201", 8125, "moment-of-zen-generator");
             stopwatch = new Stopwatch();
         }
 
